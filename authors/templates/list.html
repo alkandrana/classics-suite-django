@@ -1,0 +1,31 @@
+{% extends "master.html" %}
+{% block title %}
+    Author List
+{% endblock %}
+{% block content %}
+    <h1>Author List</h1>
+    <table class="table table-striped table-bordered table-dark">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Common Name</th>
+                <th>Full Name</th>
+                <th>Language</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for a in authors %}
+            	<tr>
+                    <td>{{ a.id }}</td>
+                    <td>{{ a.name }}</td>
+                    <td>{{ a.praenomen }} {{ a.nomen }} {{ a.cognomen }}</td>
+                    <td>{{ a.language }}</td>
+                    <td>
+                        <a href="details/{{ a.id }}">Info</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
