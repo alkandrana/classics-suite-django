@@ -4,12 +4,12 @@
 {% endblock %}
 
 {% block content %}
-    <h1>List of Works for {{ author.name }}</h1>
-    <div class="card col-4 bg-black text-white">
+    <h1 class="py-5">List of Works for {{ author.name }}</h1>
+    <div class="card col-4 bg-black text-white mb-5">
       <div class="card-body">
         <h5 class="card-title">{{ author.name }}</h5>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item bg-dark text-light">Abbreviation: {{ author.id }}</li>
+            <li class="list-group-item bg-dark text-light">Abbreviation: {{ author.abbreviation }}</li>
             <li class="list-group-item bg-dark text-light">Praenomen: {{ author.praenomen }}</li>
             <li class="list-group-item bg-dark text-light">Nomen: {{ author.nomen }}</li>
             <li class="list-group-item bg-dark text-light">Cognomen: {{ author.cognomen }}</li>

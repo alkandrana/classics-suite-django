@@ -1,0 +1,14 @@
+body {
+    background-color: #461613
+}
+
+form p {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+form label {
+  width: 150px;
+  text-align: right;
+}

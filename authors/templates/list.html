@@ -3,11 +3,14 @@
     Author List
 {% endblock %}
 {% block content %}
-    <h1>Author List</h1>
+    <div class="row">
+        <h1 class="col py-5">Author List</h1>
+        <a class="col-2 btn btn-primary align-self-center" href="add/">Add Author</a>
+    </div>
     <table class="table table-striped table-bordered table-dark">
         <thead>
             <tr>
-                <th>ID</th>
+                <th>Abbreviation</th>
                 <th>Common Name</th>
                 <th>Full Name</th>
                 <th>Language</th>
@@ -17,12 +20,19 @@
         <tbody>
             {% for a in authors %}
             	<tr>
-                    <td>{{ a.id }}</td>
+                    <td>{{ a.abbreviation }}</td>
                     <td>{{ a.name }}</td>
                     <td>{{ a.praenomen }} {{ a.nomen }} {{ a.cognomen }}</td>
                     <td>{{ a.language }}</td>
                     <td>
-                        <a href="details/{{ a.id }}">Info</a>
+                        <div class="row">
+                            <a href="details/{{ a.id }}" class="btn btn-link link-success col"><i class="fa-solid fa-circle-info">I</i></a>
+                            <a href="edit/{{ a.id }}" class="btn btn-link link-warning col"><i class="fa-solid fa-pen-to-square">E</i></a>
+                            <form action="delete/{{ a.id }}" method="POST" class="col">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-link link-danger"><i class="fa-solid fa-trash-can">D</i></button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             {% endfor %}
