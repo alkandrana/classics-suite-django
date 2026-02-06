@@ -23,14 +23,14 @@
                     <td>{{ a.abbreviation }}</td>
                     <td>{{ a.name }}</td>
                     <td>{{ a.praenomen }} {{ a.nomen }} {{ a.cognomen }}</td>
-                    <td>{{ a.language }}</td>
+                    <td>{{ a.get_language_display }}</td>
                     <td>
                         <div class="row">
-                            <a href="details/{{ a.id }}" class="btn btn-link link-success col"><i class="fa-solid fa-circle-info">I</i></a>
-                            <a href="edit/{{ a.id }}" class="btn btn-link link-warning col"><i class="fa-solid fa-pen-to-square">E</i></a>
+                            <a href="details/{{ a.id }}" class="btn btn-link link-success col"><i class="fa-solid fa-circle-info"></i></a>
+                            <a href="edit/{{ a.id }}" class="btn btn-link link-warning col"><i class="fa-solid fa-pen-to-square"></i></a>
                             <form action="delete/{{ a.id }}" method="POST" class="col">
                                 {% csrf_token %}
-                                <button type="submit" class="btn btn-link link-danger"><i class="fa-solid fa-trash-can">D</i></button>
+                                <button type="submit" class="btn btn-link link-danger"><i class="fa-solid fa-trash-can"></i></button>
                             </form>
                         </div>
                     </td>

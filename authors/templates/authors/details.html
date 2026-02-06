@@ -1,0 +1,52 @@
+{% extends "master.html" %}
+{% block title %}
+    {{ author.name }}
+{% endblock %}
+
+{% block content %}
+    <h1 class="py-5">List of Works for {{ author.name }}</h1>
+    <div class="card col-4 bg-black text-white mb-5">
+        <div class="card-body">
+            <h5 class="card-title">{{ author.name }}</h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item bg-dark text-light">Abbreviation: {{ author.abbreviation }}</li>
+                <li class="list-group-item bg-dark text-light">Praenomen: {{ author.praenomen }}</li>
+                <li class="list-group-item bg-dark text-light">Nomen: {{ author.nomen }}</li>
+                <li class="list-group-item bg-dark text-light">Cognomen: {{ author.cognomen }}</li>
+                <li class="list-group-item bg-dark text-light">Language: {{ author.get_language_display }}</li>
+            </ul>
+            <a href="/opera/add/{{ author.id }}">
+                New Work
+            </a>
+        </div>
+    </div>
+    <table class="table table-striped table-bordered table-dark">
+        <thead>
+        <tr>
+            <th>Abbreviation</th>
+            <th>Title</th>
+            <th>Language</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for w in author.opera.all %}
+            <tr>
+                <td>{{ w.abbreviation }}</td>
+                <td>{{ w.title }}</td>
+                <td>{{ w.get_dialect_display }}</td>
+                <td>
+                    <div class="row">
+                        <a href="/opera/details/{{ w.id }}" class="btn btn-link link-success col"><i class="fa-solid fa-circle-info"></i></a>
+                        <a href="/opera/edit/{{ w.id }}" class="btn btn-link link-warning col"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <form action="/opera/delete/{{ w.id }}" method="POST" class="col">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-link link-danger"><i class="fa-solid fa-trash-can"></i></button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

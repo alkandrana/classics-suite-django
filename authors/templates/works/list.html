@@ -1,0 +1,56 @@
+{% extends "master.html" %}
+{% block title %}
+    List of Works
+{% endblock %}
+{% block content %}
+    <div class="row align-items-center">
+        <h1 class="col-2 py-5">Works</h1>
+        <form method="get" class="col row p-3 rounded-5 align-items-center bg-dark">
+            <div class="col">
+                <label for="search" class="text-start">Filter by Author</label>
+            </div>
+            <div class="col">
+                <select name="search" id="search" class="" name="category">
+                    <option value="">select an author</option>
+                    {% for author in authors %}
+                        <option value="{{ author.id }}">{{ author.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary col ms-3">Filter</button>
+            <a href="/opera/" class="btn btn-secondary col">Clear</a>
+        </form>
+        <a class="col-2 btn btn-primary ms-auto" href="add/">Add Work</a>
+    </div>
+    <table class="table table-striped table-bordered table-dark">
+        <thead>
+            <tr>
+                <th>Abbreviation</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Language</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for w in opera %}
+            	<tr>
+                    <td>{{ w.abbreviation }}</td>
+                    <td>{{ w.title }}</td>
+                    <td>{{ w.author.name }}</td>
+                    <td>{{ w.get_dialect_display }}</td>
+                    <td>
+                        <div class="row">
+                            <a href="details/{{ w.id }}" class="btn btn-link link-success col"><i class="fa-solid fa-circle-info"></i></a>
+                            <a href="edit/{{ w.id }}" class="btn btn-link link-warning col"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <form action="delete/{{ w.id }}" method="POST" class="col">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-link link-danger"><i class="fa-solid fa-trash-can"></i></button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
